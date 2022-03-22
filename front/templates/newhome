@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Add New Home {% endblock %}
+
+{% block main %}
+<form class="colum-flex" method="post">
+    <div class="mb-3">
+        <input type="text" placeholder="ваш адресс аккаунта" name="acc" required>
+    </div>
+    <div class="mb-3">
+        <input type="text" placeholder="кадастровый номер" name="kdn">
+    </div>
+    <div class="mb-3">
+        <input type="text" placeholder="общая площадь" name="area" required>
+    </div>
+    <div class="mb-3">
+        <input type="text" placeholder="жилая площадь" name="usearea" required>
+    </div>
+    <div class="mb-3">
+        <input type="text" placeholder="колличество комнат" name="rooms" required>
+    </div>
+    <div class="mb-3">
+        <input type="text" placeholder="стоимость аренды" name="amount" required>
+    </div>
+    <input type="submit" value="Добавить">
+</form>
+
+
+{% endblock %}

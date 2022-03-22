@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Add New Perosanl {% endblock %}
+
+{% block main %}
+<form class="colum-flex" method="post">
+    <div class="mb-3">
+        <input type="text" placeholder="acc" name="acc" required>
+    </div>
+    <div class="mb-3">
+        <input type="date" placeholder="date" name="datareg" required>
+    </div>
+    <select name="select" size="3" multiple>
+        <option selected value="s1">Админ</option>
+        <option value="s2">Менджер</option>
+    </select>
+    <input type="submit" value="Добавить">
+</form>
+
+
+{% endblock %}

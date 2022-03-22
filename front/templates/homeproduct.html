@@ -1,0 +1,28 @@
+<div id="homeproducts">
+    {% if error == None %}
+    {% if products != None %}
+    <div>
+        {% for homeproduct = homeproduct %}
+        <div>
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-center mt-2">{{homeproduct[1]}}</h5>
+                    <p class="card-text text-center mb-2">{{homeproduct[2]}}</p>
+                </div>
+                <div class="card-footer d-flex flex-column">
+                    <small class="text-muted fs-6 mb-2 text-center mt-2 text-break">{{ homeproduct[3] }} <strong>ETH</strong></small>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="/addhome/{{ homeproduct[0] }}" class="btn btn-primary text-nowrap me-2 w-50">Арендовать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h1>Дома не найдены</h1>
+    {% endif %}
+    {% else %}
+    <h1>{{ error }}</h1>
+    {% endif %}
+</div>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <form class="colum-flex" method="post">
+        <div class="container-xxl">
+            <div class="mb-3">
+                <input type="text" placeholder="acc" name="acc" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" placeholder="key" name="key" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" placeholder="fio" name="fio" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" placeholder="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" placeholder="number" name="number" required>
+            </div>
+            <input type="submit" value="Sign up!">
+        </div>
+    </form>
+{% endblock %} 

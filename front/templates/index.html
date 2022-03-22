@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div id="index">
+    <header class="site-header">
+         <div class="container">
+              <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                      <svg class="bi me-2" width="40" height="32">
+                          <use xlink:href="#bootstrap"></use>
+                      </svg>
+                      <span class="fs-4">Rent a house</span>                      
+                  </a>          
+                  <ul class="nav nav-pills">                      
+                      <li class="nav-item"><a href="/auth" class="nav-link active" aria-current="page">Sign In</a></li>   
+                  </ul>
+                    <p>
+                        <h2>{{ home }}</h2>
+                    </p>
+                    {% if session.get('user') != None %}
+                    <div>
+                        <div style="grid-gap: 50px;" class="between">
+                            <h2 style="color: #1c1c1c;">ФИО: </h2>
+                            <h2 style="color: #646464;">{{res[1][0]}} {{res[1][1]}} {{res[1][2]}}</h2>
+                        </div>
+                        <div style="grid-gap: 50px;" class="between">
+                            <h2 style="color: #1c1c1c;">Email: </h2>
+                            <h2 style="color: #646464;">{{res[2]}}</h2>
+                        </div>
+                        <div style="grid-gap: 50px;" class="between">
+                            <h2 style="color: #1c1c1c;">Role: </h2>
+                            <h2 style="color: #646464;">{{res[6]}}</h2>
+                        </div>
+                        <div style="grid-gap: 50px;" class="between">
+                            <h2 style="color: #1c1c1c;">Ether: </h2>
+                            <h2 style="color: #646464;">{{res[5]}}</h2>
+                        </div>
+                    </div>
+                    {% endif %}
+              </header>
+                            {% if homes[0] == None %}
+                                <h2>House is not a unlock</h2>
+                                <p>{{ homes[1] }}</p>
+                            {% else %}
+                            <div class="container-xl">
+                                <div class="col card-header d-flex justify-content-between align-items-center">
+                                    <h4>Дома для аренды</h4>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseHistoryId0" aria-expanded="false"
+                                        aria-controls="collapseHistoryId0">
+                                        Раскрыть
+                                    </button>
+                                </div>
+                                
+                                <div class="col card-body">
+                                    <div class="collapse" id="collapseHistoryId0">
+                                        <ul class="list-group">
+                                            {% for home in homes %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">кадастровый номер{{home[2]}}</div>
+                                                    <span class="fw-bold text-muted">общая площадь: {{home[3}}</span>
+                                                    <span class="fw-bold text-muted">жилая площадь: {{home[4}}</span>
+                                                    <span class="fw-bold text-muted">колличество комнат: {{home[5}}</span>
+                                                    <span class="fw-bold text-muted">Cтоймость: {{home[6]}}</span>
+                                                </div>
+                                                <div class="d-flex flex-column align-items-end">
+                                                    <a href="/auth" class="badge bg-primary fs-6 w-100 rounded-pill">Арендовать</a>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {{homes}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endif %}
+           </div>                                     
+    </header>
+</div>
+
+{% endblock %}

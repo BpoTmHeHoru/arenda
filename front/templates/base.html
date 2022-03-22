@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Home Base</title>
+</head>
+<body>
+    <header class="header between">
+        <h1 class="logo">Home</h1>
+        <nav class="menu between">
+            {% if session.get('user') != None %}
+            <a href="/lk">LK</a>
+            <a href="/newhome">LK</a>
+            {% endif %}
+            {% if session.get('admin') != None %}
+            <a href="/add"></a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>(c) Смолькин Матвей & Малащицкий Георгий</p>
+    </footer>
+</body>
+</html>
