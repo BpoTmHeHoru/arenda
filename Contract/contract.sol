@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.10;
+pragma solidity ^0.8.13;
 pragma abicoder v2;
 
 contract main {
@@ -13,14 +13,6 @@ contract main {
         string Email;
         string Number;
         Roles Role;
-    }
-
-    struct manager {
-        string[3] _FIO;
-        string Email;
-        Roles Role;
-        uint256 Data;
-        uint256 NumberId;
     }
 
     struct house {
@@ -40,29 +32,13 @@ contract main {
 
     //$ Маппинги
     mapping (address => user) users;   
-    mapping (address => manager[]) managers;
     mapping (address => house[]) arendUserHouse; // хаусы, которые будет арендовать юсер
-    mapping (address => house[]) userHouse;      // хаусы, которые юсер выставляет для ареды   !!пока сделаю массивом
-    // тестируется
-    
-    
-    mapping (address => uint[]) idHouse;
-    mapping (address => house[]) userHouses;
-    
-    
-    // позже
+    mapping (address => house[]) userHouse;      // хаусы, которые юсер выставляет для ареды  
     mapping (address => string) datareg;
     mapping (uint32 => address) managerID;
     
-     //$ Хаусы
-    mapping (address => house[]) notVerefHouse; //здесь храняться хаусы
-
-
     //$ Массивы 
     house[] verefHouses;  // хаусы которые выставлены на продажу в аренду
-    house[] userHouseArray;
-
-    
 
     modifier isManager(uint32 id) {
         require(managerID[id] == msg.sender, "You are Manager!"); //Проверка на манагера
@@ -93,55 +69,22 @@ contract main {
 
     function addHouseInSystem(uint256 kdn, uint256 area, uint256 usearea, uint8 rooms, uint amount) public isUser {
         userHouse[msg.sender].push(house(msg.sender, address(0), kdn, area, usearea, rooms, amount, 0, 0, Statuses.ne_sdaetsa, Veref.v_proverke, 0));
-        //userHouse[msg.sender][userHouse[msg.sender].length -1].id = notVerefHouse[msg.sender].length -1;
     }
 
     function removeHouseInSystem() public isUser {
-        //require(notVerefHouse[id].Owner == msg.sender, "You are no Owner!");
         userHouse[msg.sender].pop();
     }
 
-
-
-
-
-
-
-
-
-
-
-
+            // Не работает, можно не тыкаться, всё остальное работает
     function arendHouse(uint id, uint minMounth) public {
-        arendUserHouse[verefHouses[id].Owner].push();
-        //userHouseArray.push(house());
-        arendUserHouse[msg.sender][verefHouses[id].id].MinMonth = uint8(minMounth);
-        verefHouses.pop();
-
+        userHouse[verefHouses[id].Owner].push();
+        userHouse[msg.sender][verefHouses[id].id].MinMonth = uint8(minMounth);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //$ функционал менеджера
 
-    function VerefHouse(string memory _str, uint id, address _to, uint256 kdn, uint256 area, uint256 usearea, uint8 rooms, uint amount) public returns (string memory) {
-        //require(house.Verefication == Statuses.v_proverke);
+    function VerefHouse(string memory _str, address _to, uint256 kdn, uint256 area, uint256 usearea, uint8 rooms, uint amount) public returns (string memory) {
+        require(users[msg.sender].Role == Roles.manager);
         if(keccak256(bytes(_str)) == keccak256(bytes("yes"))) {
         verefHouses.push(house(_to, address(0), kdn, area, usearea, rooms, amount, 0, 0, Statuses.v_spiske, Veref.veref, verefHouses.length));
         removeHouseInSystem();
@@ -169,33 +112,4 @@ contract main {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Для теста, потом удалить!
-    function returnHouseInSystem() public view returns (house[] memory) {
-        
-        return userHouse[msg.sender];
-    }
-
-    function returnHouseInSysteM() public view returns (house[] memory) {
-        return verefHouses;
-    }
-
-    // ----------------------------------------------------------------
-   
 }   
