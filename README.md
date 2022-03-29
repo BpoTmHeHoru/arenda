@@ -14,6 +14,16 @@ $ Доброго времени суток user_name!
                                             $  geth --datadir node1 init .\genesis.json 
                                             $  geth --datadir node2 init .\genesis.json 
                                             
+      в файле config.json изменить IP-адрес на свой 
+      свой Ip ты можешь узнать в командной строке командой $ ipconfig      
+                    
+                    
+            "node1": {
+                "ip": "192.168.43.111",
+                             ^
+                    сюда вставляй свой IP
+                    
+                    
     5 Перейдём в Каталог ~/bnode откроем PowerShell и впишем:
     
                                             $  python.exe .\start.py
